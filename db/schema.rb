@@ -16,9 +16,11 @@ ActiveRecord::Schema.define(version: 2020_09_19_183554) do
   enable_extension "plpgsql"
 
   create_table "discounts", force: :cascade do |t|
-    t.integer "discount"
-    t.integer "amount"
+    t.integer "percentage"
+    t.integer "item_amount"
     t.bigint "merchant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["merchant_id"], name: "index_discounts_on_merchant_id"
   end
 

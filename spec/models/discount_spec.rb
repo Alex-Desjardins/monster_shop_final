@@ -6,9 +6,9 @@ RSpec.describe Discount do
   end
 
   describe "validations" do
-      it { should validate_presence_of :discount }
-      it { should validate_presence_of :amount }
-      it { should validate_numericality_of :discount }
-      it { should validate_numericality_of :amount }
+      it { should validate_presence_of :percentage }
+      it { should validate_presence_of :item_amount }
+      it { should validate_numericality_of :percentage }
+      it { should validate_numericality_of :item_amount }
   end
 end
