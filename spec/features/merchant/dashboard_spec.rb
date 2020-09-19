@@ -70,30 +70,5 @@ RSpec.describe 'Merchant Dashboard' do
 
       expect(current_path).to eq("/merchant/orders/#{@order_2.id}")
     end
-
-    it 'I can link to a discounts index page' do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
-      visit '/merchant'
-      expect(page).to have_link "Discounts"
-      click_link "Discounts"
-
-      expect(current_path).to eq("/merchant/discounts")
-      expect(page).to have_content("5% off 10 items")
-      expect(page).to have_content("10% off 20 items")
-    end
-
-    it "Discounts are specific for each merchant" do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@b_user)
-      visit '/merchant'
-
-      click_link "Discounts"
-
-      expect(current_path).to eq("/merchant/discounts")
-      expect(page).to have_content("10% off 5 items")
-      expect(page).to have_content("10% off 10 items")
-
-      expect(page).to_not have_content("5% off 10 items")
-      expect(page).to_not have_content("10% off 20 items")
-    end
   end
 end
