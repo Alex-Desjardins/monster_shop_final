@@ -1,7 +1,9 @@
 <h2>Current Discounts</h2>
 
 <% @discounts.each do |discount| %>
-  <p><%= discount.percentage %>% off <%= discount.item_amount %> items</p>
+  <div id="discount-<%= discount.id %>">
+    <p><%= discount.percentage %>% off <%= discount.item_amount %> items     <%= link_to "Edit Discount", "/merchant/discounts/#{discount.id}/edit", method: :get %></p>
+  </div>
 <% end %>
 
 <section>
