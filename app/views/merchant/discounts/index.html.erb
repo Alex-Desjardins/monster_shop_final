@@ -1,0 +1,5 @@
+<h1>Current Discounts</h1>
+
+<% @discounts.each do |discount| %>
+  <p><%= discount.percentage %>% off <%= discount.item_amount %> items.</p>
+<% end %>
