@@ -1,10 +1,12 @@
 <h2>Current Discounts</h2>
-
-<% @discounts.each do |discount| %>
+<section>
+  <% @discounts.each do |discount| %>
   <div id="discount-<%= discount.id %>">
-    <p><%= discount.percentage %>% off <%= discount.item_amount %> items     <%= link_to "Edit Discount", "/merchant/discounts/#{discount.id}/edit", method: :get %></p>
+    <p><%= discount.percentage %>% off <%= discount.item_amount %> items</p>
+    <%= link_to "Edit Discount", "/merchant/discounts/#{discount.id}/edit", method: :get %><br><br>
   </div>
-<% end %>
+  <% end %>
+</section><br><br><br>
 
 <section>
   <%= link_to "Add New Discount", "/merchant/discounts/new", method: :get %>

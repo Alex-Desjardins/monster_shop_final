@@ -28,7 +28,7 @@ RSpec.describe 'Merchant Index Page' do
       expect(current_path).to eq("/merchant/discounts/#{@discount1.id}/edit")
     end
 
-    it "Edit discount happy path with pre-populated number fields" do
+    it "Edit discount happy path with pre-populated number fields and flash success" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
       visit "/merchant/discounts/#{@discount1.id}/edit"
 
@@ -46,6 +46,24 @@ RSpec.describe 'Merchant Index Page' do
         expect(page).to have_content("10% off 3 items")
         expect(page).to have_link("Edit Discount")
       end
+    end
+
+    it "Edit discount sad path with pre-populated number fields and flash errors" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
+      visit "/merchant/discounts/#{@discount1.id}/edit"
+
+      expect(find_field(:percentage).value).to eq @discount1.percentage.to_s
+      expect(find_field(:item_amount).value).to eq @discount1.item_amount.to_s
+
+      fill_in :percentage, with: ""
+      fill_in :item_amount, with: 3
+
+      click_button "Update Discount"
+
+      expect(page).to have_content("Percentage can't be blank and Percentage is not a number")
+
+      expect(find_field(:percentage).value).to eq nil
+      expect(find_field(:item_amount).value).to eq "3"
     end
   end
 end
