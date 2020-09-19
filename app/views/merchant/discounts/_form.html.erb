@@ -1,0 +1,7 @@
+<%= form_tag path, method: method do %>
+  <%= label_tag "Percentage Off" %>
+  <%= number_field_tag :percentage %>
+  <%= label_tag "Item Quantity" %>
+  <%= number_field_tag :item_amount %>
+  <%= submit_tag button_text %>
+<% end %>

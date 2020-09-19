@@ -1,5 +1,9 @@
-<h1>Current Discounts</h1>
+<h2>Current Discounts</h2>
 
 <% @discounts.each do |discount| %>
-  <p><%= discount.percentage %>% off <%= discount.item_amount %> items.</p>
+  <p><%= discount.percentage %>% off <%= discount.item_amount %> items</p>
 <% end %>
+
+<section>
+  <%= link_to "Add New Discount", "/merchant/discounts/new", method: :get %>
+</section>
