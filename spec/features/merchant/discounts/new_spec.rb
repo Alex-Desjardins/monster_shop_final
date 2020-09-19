@@ -33,5 +33,17 @@ RSpec.describe 'Merchant Index Page' do
       expect(current_path).to eq("/merchant/discounts")
       expect(page).to have_content("15% off 20 items")
     end
+
+    it "New discount sad path with pre-populated number fields" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
+      visit '/merchant/discounts/new'
+
+      fill_in :percentage, with: ""
+      fill_in :item_amount, with: 20
+      click_button "Create Discount"
+
+      expect(page).to have_content("Percentage can't be blank and Percentage is not a number")
+      expect(find_field(:item_amount).value).to eq "20"
+    end
   end
 end

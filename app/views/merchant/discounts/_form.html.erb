@@ -1,7 +1,7 @@
 <%= form_tag path, method: method do %>
-  <%= label_tag "Percentage Off" %>
-  <%= number_field_tag :percentage %>
-  <%= label_tag "Item Quantity" %>
-  <%= number_field_tag :item_amount %>
+  <%= label_tag :percentage %>
+  <%= number_field_tag :percentage, (if @discount.present? then @discount.percentage else nil end) %>
+  <%= label_tag :item_amount %>
+  <%= number_field_tag :item_amount, (if @discount.present? then @discount.item_amount else nil end) %>
   <%= submit_tag button_text %>
 <% end %>
