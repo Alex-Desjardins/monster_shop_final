@@ -26,6 +26,8 @@ RSpec.describe Item do
       @review_3 = @ogre.reviews.create(title: 'EW', description: 'This Ogre is Ew', rating: 1)
       @review_4 = @ogre.reviews.create(title: 'So So', description: 'This Ogre is So so', rating: 2)
       @review_5 = @ogre.reviews.create(title: 'Okay', description: 'This Ogre is Okay', rating: 4)
+      @discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
+      @discount_2 = @megan.discounts.create!(percentage: 10, item_amount: 10)
     end
 
     it '.sorted_reviews()' do
@@ -39,18 +41,12 @@ RSpec.describe Item do
     end
 
     it 'discount_minimum_amount' do
-      discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
-      discount_2 = @megan.discounts.create!(percentage: 10, item_amount: 10)
-
       expect(@ogre.discount_minimum_amount).to eq(5)
     end
 
     it "greatest_discount()" do
-      discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
-      discount_2 = @megan.discounts.create!(percentage: 10, item_amount: 10)
       cart_item_amount = 11
-
-      expect(@ogre.greatest_discount(cart_item_amount)).to eq(discount_2)
+      expect(@ogre.greatest_discount(cart_item_amount)).to eq(@discount_2)
     end
   end
 

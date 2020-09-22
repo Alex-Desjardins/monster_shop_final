@@ -27,7 +27,7 @@ class Cart
   def grand_total
     total = 0.0
     @contents.each do |item_id, item_quantity|
-      if item_quantity >= Item.find(item_id).discount_minimum_amount
+      if !Item.find(item_id).merchant.discounts.empty? && item_quantity >= Item.find(item_id).discount_minimum_amount
         total += discount_subtotal_of(item_id)
       else
         total += subtotal_of(item_id)

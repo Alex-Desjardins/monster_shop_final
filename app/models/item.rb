@@ -31,7 +31,7 @@ class Item < ApplicationRecord
   end
 
   def discount_minimum_amount
-    merchant.discounts.order(:item_amount).first.item_amount if !merchant.discounts.empty?
+    merchant.discounts.order(:item_amount).first.item_amount
   end
 
   def greatest_discount(cart_item_amount)
