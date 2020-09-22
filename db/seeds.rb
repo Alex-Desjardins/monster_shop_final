@@ -10,8 +10,9 @@
 megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
 brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
 
-megan.discounts.create!(percentage: 5, item_amount: 5)
-megan.discounts.create!(percentage: 10, item_amount: 20)
+discount_1 = megan.discounts.create!(percentage: 5, item_amount: 5)
+discount_2 = megan.discounts.create!(percentage: 10, item_amount: 5)
+discount_3 = megan.discounts.create!(percentage: 15, item_amount: 5)
 
 user = User.create!(name: 'Billy Joel',
                     address: '123 Song St.',
