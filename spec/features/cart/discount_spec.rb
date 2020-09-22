@@ -66,5 +66,29 @@ RSpec.describe 'Cart Discount Show Page' do
 
       expect(page).to have_content('Total: $230.00')
     end
+
+    it "Cart automatically applies discount to multiple items" do
+      9.times do
+        within "#item-#{@ogre.id}" do
+          click_button 'More of This!'
+        end
+      end
+
+      within "#item-#{@ogre.id}" do
+        expect(page).to have_content('Subtotal(10% Discount Applied): $180')
+      end
+
+      4.times do
+        within "#item-#{@giant.id}" do
+          click_button 'More of This!'
+        end
+      end
+
+      within "#item-#{@giant.id}" do
+        expect(page).to have_content('Subtotal(5% Discount Applied): $237.50')
+      end
+
+      expect(page).to have_content('Total: $417.50')
+    end
   end
 end
