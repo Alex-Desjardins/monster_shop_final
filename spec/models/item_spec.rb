@@ -40,8 +40,17 @@ RSpec.describe Item do
 
     it 'discount_minimum_amount' do
       discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
+      discount_2 = @megan.discounts.create!(percentage: 10, item_amount: 10)
 
       expect(@ogre.discount_minimum_amount).to eq(5)
+    end
+
+    it "greatest_discount()" do
+      discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
+      discount_2 = @megan.discounts.create!(percentage: 10, item_amount: 10)
+      cart_item_amount = 11
+
+      expect(@ogre.greatest_discount(cart_item_amount)).to eq(discount_2)
     end
   end
 

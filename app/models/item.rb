@@ -33,4 +33,8 @@ class Item < ApplicationRecord
   def discount_minimum_amount
     merchant.discounts.order(:item_amount).first.item_amount if !merchant.discounts.empty?
   end
+
+  def greatest_discount(cart_item_amount)
+    merchant.discounts.where('discounts.item_amount <= ?', cart_item_amount).order(:percentage).last
+  end
 end
