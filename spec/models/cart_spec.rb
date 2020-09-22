@@ -12,6 +12,7 @@ RSpec.describe Cart do
         @ogre.id.to_s => 1,
         @giant.id.to_s => 2
         })
+      Discount.create!(percentage: 5, item_amount: 5, merchant_id: @megan.id)
     end
 
     it '.contents' do
@@ -41,6 +42,8 @@ RSpec.describe Cart do
 
     it '.grand_total' do
       expect(@cart.grand_total).to eq(120)
+      @cart.contents[@ogre.id.to_s] = 5
+      expect(@cart.grand_total).to eq(195)
     end
 
     it '.count_of()' do
@@ -60,14 +63,11 @@ RSpec.describe Cart do
 
     it '.less_item()' do
       @cart.less_item(@giant.id.to_s)
-
       expect(@cart.count_of(@giant.id)).to eq(1)
     end
 
     it 'discount_subtotal_of()' do
-      discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
       @cart.contents[@ogre.id.to_s] = 6
-
       expect(@cart.discount_subtotal_of(@ogre.id)).to eq(114)
     end
   end
