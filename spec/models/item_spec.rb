@@ -37,6 +37,12 @@ RSpec.describe Item do
     it '.average_rating' do
       expect(@ogre.average_rating.round(2)).to eq(3.00)
     end
+
+    it 'discount_minimum_amount' do
+      discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 5)
+
+      expect(@ogre.discount_minimum_amount).to eq(5)
+    end
   end
 
   describe 'Class Methods' do

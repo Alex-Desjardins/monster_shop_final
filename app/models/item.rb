@@ -29,4 +29,8 @@ class Item < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def discount_minimum_amount
+    merchant.discounts.order(:item_amount).first.item_amount if !merchant.discounts.empty?
+  end
 end
