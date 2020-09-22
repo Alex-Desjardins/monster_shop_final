@@ -19,7 +19,7 @@ RSpec.describe 'Cart Discount Show Page' do
       visit '/cart'
     end
 
-    it "I dont see discouts applied if item_amount minimum isnt met" do
+    it "I dont see discounts applied if item_amount minimum isnt met" do
       within "#item-#{@ogre.id}" do
         expect(page).to have_content('Subtotal: $20.00')
       end
