@@ -5,8 +5,27 @@ class Order < ApplicationRecord
 
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
 
+  def greatest_discount(order_item)
+    order_item.item_id.merchant.discounts.where('discounts.item_amount <= ?', cart_item_amount).order(:percentage).last
+  end
+
+  def discount_subtotal_of(item_id)
+    item = Item.find(item_id)
+    order_item = OrderItem.find_by(item_id: item_id)
+    greatest_discount = item.greatest_discount(order_item.quantity)
+    (order_item.quantity * item.price * ((100 - greatest_discount.percentage.to_f) / 100)).round(2) if !greatest_discount.nil?
+  end
+
   def grand_total
-    order_items.sum('price * quantity')
+    total = 0.0
+    order_items.each do |order_item|
+      if !Item.find(order_item.item_id).merchant.discounts.empty? && order_item.quantity >= Item.find(order_item.item_id).discount_minimum_amount
+        total += discount_subtotal_of(order_item.item_id)
+      else
+        total = order_items.sum('price * quantity')
+      end
+    end
+    total.round(2)
   end
 
   def count_of_items
