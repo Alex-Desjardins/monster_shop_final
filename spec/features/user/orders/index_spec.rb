@@ -51,7 +51,6 @@ RSpec.describe 'User Order Show Page' do
 
     it 'I see order total changen when items have discounts' do
       discount_1 = @megan.discounts.create!(percentage: 5, item_amount: 2)
-      # discount_2 = @brian.discounts.create!(percentage: 10, item_amount: 2)
 
       visit '/profile/orders'
 
