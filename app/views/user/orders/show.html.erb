@@ -13,6 +13,10 @@
     <p><%= order_item.item.description %></p>
     <p>Quantity: <%= order_item.quantity %></p>
     <p>Price: <%= number_to_currency(order_item.price) %></p>
-    <p>Subtotal: <%= number_to_currency(order_item.subtotal) %></p>
+    <% if !order_item.find_item(order_item.item_id).merchant.discounts.empty? && order_item.quantity >= order_item.find_item(order_item.item_id).discount_minimum_amount %>
+      <p>Subtotal(<%= order_item.find_item(order_item.item_id).greatest_discount(order_item.quantity).percentage %>% Discount Applied): <%= number_to_currency(order_item.discount_subtotal_of(order_item)) %></p>
+    <% else %>
+      <p>Subtotal: <%= number_to_currency(order_item.subtotal) %></p>
+    <% end %>
   </section>
 <% end %>
