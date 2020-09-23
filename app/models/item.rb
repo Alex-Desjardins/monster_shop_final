@@ -29,4 +29,12 @@ class Item < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def discount_minimum_amount
+    merchant.discounts.order(:item_amount).first.item_amount
+  end
+
+  def greatest_discount(item_quantity)
+    merchant.discounts.where('discounts.item_amount <= ?', item_quantity).order(:percentage).last
+  end
 end

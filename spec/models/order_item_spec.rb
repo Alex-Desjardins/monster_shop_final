@@ -16,13 +16,22 @@ RSpec.describe OrderItem do
       @user = User.create!(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
       @order_1 = @user.orders.create!
       @order_2 = @user.orders.create!
-      @order_item_1 = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
+      @order_item_1 = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 5)
       @order_item_2 = @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_item_3 = @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 27)
+      @discount_2 = Discount.create!(percentage: 5, item_amount: 5, merchant_id: @megan.id)
+    end
+
+    it "discount_subtotal_of()" do
+      expect(@order_item_1.discount_subtotal_of(@order_item_1)).to eq(96.19)
+    end
+
+    it "find_item()" do
+      expect(@order_item_1.find_item(@order_item_1.item_id)).to eq(@ogre)
     end
 
     it '.subtotal' do
-      expect(@order_item_1.subtotal).to eq(40.5)
+      expect(@order_item_1.subtotal).to eq(101.25)
       expect(@order_item_2.subtotal).to eq(150)
       expect(@order_item_3.subtotal).to eq(1350)
     end
@@ -38,7 +47,7 @@ RSpec.describe OrderItem do
       @order_item_1.reload
       @ogre.reload
       expect(@order_item_1.fulfilled).to eq(true)
-      expect(@ogre.inventory).to eq(3)
+      expect(@ogre.inventory).to eq(0)
     end
   end
 end

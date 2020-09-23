@@ -20,10 +20,15 @@ RSpec.describe Order do
       @order_item_1 = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 5, fulfilled: true)
       @order_item_2 = @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 2, fulfilled: true)
       @order_item_3 = @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2, fulfilled: false)
+      @discount_2 = Discount.create!(percentage: 5, item_amount: 5, merchant_id: @megan.id)
+    end
+
+    it "discount_subtotal_of()" do
+      expect(@order_1.discount_subtotal_of(@ogre.id)).to eq(96.19)
     end
 
     it '.grand_total' do
-      expect(@order_1.grand_total).to eq(101.25)
+      expect(@order_1.grand_total).to eq(96.19)
       expect(@order_2.grand_total).to eq(140.5)
     end
 
