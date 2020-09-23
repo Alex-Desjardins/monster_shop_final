@@ -5,9 +5,6 @@ class Order < ApplicationRecord
 
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
 
-  def greatest_discount(order_item)
-    order_item.item_id.merchant.discounts.where('discounts.item_amount <= ?', cart_item_amount).order(:percentage).last
-  end
 
   def discount_subtotal_of(item_id)
     item = Item.find(item_id)

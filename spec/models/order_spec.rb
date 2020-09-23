@@ -23,10 +23,6 @@ RSpec.describe Order do
       @discount_2 = Discount.create!(percentage: 5, item_amount: 5, merchant_id: @megan.id)
     end
 
-    it "greatest_discount()" do
-      expect(@ogre.greatest_discount(@order_item_1)).to eq(@discount_2)
-    end
-
     it "discount_subtotal_of()" do
       expect(@order_1.discount_subtotal_of(@ogre.id)).to eq(96.19)
     end
