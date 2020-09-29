@@ -11,11 +11,15 @@ Rails.application.routes.draw do
   patch '/merchants/:id', to: 'merchants#update'
   delete '/merchants/:id', to: 'merchants#destroy'
 
-  resources :items, only: [:index, :show] do
-    resources :reviews, only: [:new, :create]
-  end
+  get '/items', to: 'items#index'
+  get '/items/:id', to: 'items#show', as: :item
+  get '/items/:item_id/reviews/new', to: 'reviews#new', as: :new_item_review
+  post '/items/:item_id/reviews', to: 'reviews#create', as: :item_reviews
 
-  resources :reviews, only: [:edit, :update, :destroy]
+  get '/reviews/:id/edit', to: 'reviews#edit', as: :edit_review
+  patch '/reviews/:id', to: 'reviews#update'
+  put '/reviews/:id', to: 'reviews#update'
+  delete '/reviews/:id', to: 'reviews#destroy', as: :review
 
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
