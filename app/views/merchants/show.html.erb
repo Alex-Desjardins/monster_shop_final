@@ -13,7 +13,7 @@
     <p>Item Count: <%= @merchant.item_count %></p>
     <p>Average Item Price: <%= number_to_currency(@merchant.average_item_price) %></p>
     <% if @merchant.order_items.empty? %>
-      <p>This Merchant has no Orders!</p>
+      <p>This merchant has not yet fulfilled orders.</p>
     <% else %>
       <p>Cities Served:</p>
       <ul>
