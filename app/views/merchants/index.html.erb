@@ -11,4 +11,4 @@
   </section>
 <% end %>
 <br>
-<h3>Register as a <%= link_to 'New Merchant', '/merchants/new' %></h3>
+<h3><%= link_to 'New Merchant Registration', '/merchants/new' unless current_merchant_user? || current_admin? %></h3>
