@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <nav>
+    <h3><nav>
       <%= link_to 'Home', root_path %>
       <%= link_to 'Register', registration_path unless current_user %>
       <%= link_to 'Log In', login_path unless current_user %>
@@ -28,7 +28,7 @@
       <%= link_to 'Merchants', '/merchants' %>
       <%= link_to 'Items', '/items' %>
       <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin?%>
-    </nav>
+    </nav></h3>
     <% flash.each do |type, message| %>
     <p><%= message %></p>
     <% end %>
