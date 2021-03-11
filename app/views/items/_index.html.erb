@@ -15,7 +15,7 @@
     <hr width="60%" align="center">
     <h2><%= link_to item.name, "/items/#{item.id}" %></h2>
     <p><%= item.description %></p>
-    <%= link_to(image_tag(item.image), item_path(item), id: 'image') %>
+    <%= link_to(image_tag(item.image, height: 250), item_path(item), id: 'image') %>
     <p>Price: <%= number_to_currency(item.price) %></p>
     <%= button_to 'Add to Cart', "/cart/#{item.id}" %>
     <p>Sold by: <%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %>, Inventory: <%= item.inventory %></p>
