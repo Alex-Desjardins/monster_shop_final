@@ -1,8 +1,9 @@
 <h1><%= @merchant.name %></h1>
 
 <section class='address'>
-  <p><%= @merchant.address %></p>
-  <p><%= @merchant.city %> <%= @merchant.state %> <%= @merchant.zip %></p>
+  <%= @merchant.address %>
+  <br>
+  <%= @merchant.city %> <%= @merchant.state %> <%= @merchant.zip %>
 </section>
 
 <section class='statistics'>
