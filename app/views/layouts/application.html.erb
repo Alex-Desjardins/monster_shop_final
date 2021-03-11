@@ -13,10 +13,12 @@
       <%= link_to 'Home', root_path %>
       <%= link_to 'Register', registration_path unless current_user %>
       <%= link_to 'Log In', login_path unless current_user %>
+      <%= link_to 'Merchants', '/merchants' %>
+      <%= link_to 'Items', '/items' %>
+      <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin?%>
       <% if current_user %>
-        <%= link_to 'Log Out', logout_path %>
         <%= link_to 'Profile', profile_path %>
-        <p>Logged in as <%= current_user.name %></p>
+        <%# Logged in as <%= current_user.name %>
         <% if current_merchant_user? %>
           <%= link_to 'Merchant Dashboard', merchant_dashboard_path %>
           <%= link_to 'Discounts', merchant_discounts_path %>
@@ -24,11 +26,10 @@
           <%= link_to 'Admin Dashboard', admin_dashboard_path %>
           <%= link_to 'Users', '/admin/users' %>
         <% end %>
+        <%= link_to 'Log Out', logout_path %>
       <% end %>
-      <%= link_to 'Merchants', '/merchants' %>
-      <%= link_to 'Items', '/items' %>
-      <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin?%>
     </nav></h3>
+
     <% flash.each do |type, message| %>
     <p><%= message %></p>
     <% end %>
