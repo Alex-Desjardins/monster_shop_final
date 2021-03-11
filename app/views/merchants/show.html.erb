@@ -25,9 +25,11 @@
   <% end %>
 </section>
 
-<% if current_admin? %>
-  <%= button_to 'Delete', "/merchants/#{@merchant.id}", method: :delete  if @merchant.order_items.empty? %>
-<% elsif current_user.merchant_id == @merchant.id %>
-  <%= button_to 'Edit', "/merchants/#{@merchant.id}/edit", method: :get %>
-  <%= button_to 'Delete', "/merchants/#{@merchant.id}", method: :delete  if @merchant.order_items.empty? %>
+<% if !current_user.nil? %>
+  <% if current_admin? %>
+    <%= button_to 'Delete', "/merchants/#{@merchant.id}", method: :delete  if @merchant.order_items.empty? %>
+  <% elsif current_user.merchant_id == @merchant.id %>
+    <%= button_to 'Edit', "/merchants/#{@merchant.id}/edit", method: :get %>
+    <%= button_to 'Delete', "/merchants/#{@merchant.id}", method: :delete  if @merchant.order_items.empty? %>
+  <% end %>
 <% end %>
