@@ -15,7 +15,6 @@ RSpec.describe 'User Login and Log Out' do
         click_button 'Log In'
 
         expect(current_path).to eq(profile_path)
-        expect(page).to have_content("Logged in as #{@user.name}")
       end
 
       it 'users already logged in will be redirected' do
@@ -42,7 +41,6 @@ RSpec.describe 'User Login and Log Out' do
         click_button 'Log In'
 
         expect(current_path).to eq(merchant_dashboard_path)
-        expect(page).to have_content("Logged in as #{@m_user.name}")
       end
 
       it 'users already logged in will be redirected' do
@@ -68,7 +66,6 @@ RSpec.describe 'User Login and Log Out' do
         click_button 'Log In'
 
         expect(current_path).to eq(admin_dashboard_path)
-        expect(page).to have_content("Logged in as #{@admin.name}")
       end
 
       it 'users already logged in will be redirected' do
@@ -125,7 +122,6 @@ RSpec.describe 'User Login and Log Out' do
       click_link 'Log Out'
 
       expect(current_path).to eq(root_path)
-      expect(page).to_not have_content("Logged in as #{@user.name}")
       expect(page).to have_content('You have been logged out!')
     end
 

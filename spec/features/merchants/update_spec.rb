@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Existing Merchant Update' do
-  describe 'As a Visitor' do
+  describe 'As a merchant' do
     before :each do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      @m_user = @megan.users.create(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'secret')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
     end
 
     it 'I can link to an edit merchant page from merchant show page' do

@@ -28,7 +28,7 @@ RSpec.describe 'Merchant Order Show Page' do
       expect(page).to have_content(@m_user.zip)
 
       within "#order-item-#{@order_item_3.id}" do
-        expect(page).to have_link(@order_item_3.item.name)
+        expect(page).to have_content(@order_item_3.item.name)
         expect(page).to have_content(@order_item_3.price)
         expect(page).to have_content(@order_item_3.quantity)
       end

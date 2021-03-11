@@ -71,14 +71,6 @@ RSpec.describe 'Site Navigation' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
-    it 'I see who I am logged in as' do
-      visit root_path
-
-      within 'nav' do
-        expect(page).to have_content("Logged in as #{@user.name}")
-      end
-    end
-
     describe 'I see a nav bar where I can link to' do
       it 'the welcome page' do
         visit items_path
@@ -161,14 +153,6 @@ RSpec.describe 'Site Navigation' do
       @merchant = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
       @m_user = @merchant.users.create(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
-    end
-
-    it 'I see who I am logged in as' do
-      visit root_path
-
-      within 'nav' do
-        expect(page).to have_content("Logged in as #{@m_user.name}")
-      end
     end
 
     describe 'I see a nav bar where I can link to' do
@@ -262,14 +246,6 @@ RSpec.describe 'Site Navigation' do
     before :each do
       @admin = User.create(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword', role: :admin)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
-    end
-
-    it 'I see who I am logged in as' do
-      visit root_path
-
-      within 'nav' do
-        expect(page).to have_content("Logged in as #{@admin.name}")
-      end
     end
 
     describe 'I see a nav bar where I can link to' do

@@ -12,13 +12,10 @@ RSpec.describe 'Destroy Existing Merchant' do
       @order.order_items.create(item: @ogre, quantity: 3, price: @ogre.price)
     end
 
-    it 'I can click button to destroy merchant from database' do
+    it 'I cannot click button to destroy merchant from database' do
       visit "/merchants/#{@brian.id}"
 
-      click_button 'Delete'
-
-      expect(current_path).to eq('/merchants')
-      expect(page).to_not have_content(@brian.name)
+      expect(page).to_not have_link("Delete")
     end
 
     it 'When a merchant is destroyed, their items are also destroyed' do
